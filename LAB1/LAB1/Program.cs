@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualBasic.CompilerServices;
-
-namespace LAB1;
+﻿namespace LAB1;
 
 using System.Net;
 using System.Net.Sockets;
@@ -27,38 +25,25 @@ public static class Program
         var tmp = ((Func<bool>)TOCHECK)();
 
         if (tmp)
-        {
             while (true)
-            {
                 Console.WriteLine("FATAL");
-            }
-        }
     }
 
 
     public static async Task<int> Main()
     {
-        bool sentMessageNeedBackPing = false;
-        bool getMessageNeedToSendPing = false;
-        bool FATAL = false;
+        var sentMessageNeedBackPing = false;
+        var getMessageNeedToSendPing = false;
+        var FATAL = false;
 
-        TimerCallback tm = new TimerCallback(CHECK);
-        Timer timer = new Timer(tm, new Func<bool>(() => sentMessageNeedBackPing), 0, 5000);
-        //timer
-
+        var tm = new TimerCallback(CHECK);
+        var timer = new Timer(tm, new Func<bool>(() => sentMessageNeedBackPing), 0, 5000);
 
         var acceptedMessages = new List<Message>();
         var sentMessages = new List<Message>();
 
-        // bool messageSent = false;
-        // bool waitingForSuccess = false;
-        // bool messageReceived = false;
-        // bool needToResponse = false;
-
-        IPAddress localAddress = IPAddress.Parse("127.0.0.1");
+        var localAddress = IPAddress.Parse("127.0.0.1");
         var username = "";
-        //var acceptPort = 0;
-        //var sendPort = 0;
 
         Console.Write("Username: ");
         username = Console.ReadLine();
@@ -77,37 +62,20 @@ public static class Program
 
         async Task SendConfirmationMessage()
         {
-            using Socket sender = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+            using var sender = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
             var message = "SUCCESS";
-            byte[] data = Encoding.UTF8.GetBytes(message);
+            var data = Encoding.UTF8.GetBytes(message);
             // и отправляем на 127.0.0.1:remotePort
             await sender.SendToAsync(data, SocketFlags.None, new IPEndPoint(localAddress, remotePort));
         }
 
         async Task SendMessageAsync()
         {
-            using Socket sender = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+            using var sender = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
 
             Console.WriteLine("Enter message: ");
             while (true)
             {
-                // if (getMessageNeedToSendPing)
-                // {
-                //     await SendConfirmationMessage();
-                //     Console.WriteLine("SENT BACK PING");
-                //     getMessageNeedToSendPing = false;
-                // }
-
-                // if (messageReceived && needToResponse)
-                // {
-                //     Console.WriteLine("SENDING SUCCESS");
-                //     
-                //     var success = "KEYFORSUCCESS";
-                //     byte[] successData = Encoding.UTF8.GetBytes(success);
-                //     // и отправляем на 127.0.0.1:remotePort
-                //     await sender.SendToAsync(successData, SocketFlags.None, new IPEndPoint(localAddress, remotePort));
-                // }
-
                 var message = Console.ReadLine();
 
                 if (string.IsNullOrWhiteSpace(message)) break;
@@ -115,15 +83,9 @@ public static class Program
                 sentMessages.Add(new Message(DateTime.Now, username, message));
 
                 message = $"|{DateTime.Now}|#{username}#%{message}%";
-                byte[] data = Encoding.UTF8.GetBytes(message);
+                var data = Encoding.UTF8.GetBytes(message);
 
-
-                // и отправляем на 127.0.0.1:remotePort
                 await sender.SendToAsync(data, SocketFlags.None, new IPEndPoint(localAddress, remotePort));
-
-
-                // messageSent = true;
-                // waitingForSuccess = true;
 
                 Console.Clear();
 
@@ -133,10 +95,7 @@ public static class Program
                     Console.WriteLine($"{item.SenderName}: {item.Text}");
                 }
 
-                foreach (var item in sentMessages)
-                {
-                    Console.WriteLine($"You: {item.Text}");
-                }
+                foreach (var item in sentMessages) Console.WriteLine($"You: {item.Text}");
 
                 sentMessageNeedBackPing = true;
             }
@@ -144,16 +103,15 @@ public static class Program
 
         async Task ReceiveMessageAsync()
         {
-            byte[] data = new byte[65535];
+            var data = new byte[65535];
 
-            using Socket
+            using var
                 receiver = new Socket(AddressFamily.InterNetwork, SocketType.Dgram,
                     ProtocolType.Udp); // socket for listening
 
             receiver.Bind(new IPEndPoint(localAddress, localPort));
             while (true)
             {
-                // получаем данные в массив data
                 var result = await receiver.ReceiveFromAsync(data, SocketFlags.None, new IPEndPoint(IPAddress.Any, 0));
                 var message = Encoding.UTF8.GetString(data, 0, result.ReceivedBytes);
 
@@ -163,30 +121,13 @@ public static class Program
                     sentMessageNeedBackPing = false;
                 }
 
-                if (message != "SUCCESS")
-                {
-                    getMessageNeedToSendPing = true;
-                }
+                if (message != "SUCCESS") getMessageNeedToSendPing = true;
 
                 if (getMessageNeedToSendPing)
                 {
                     await SendConfirmationMessage();
                     getMessageNeedToSendPing = false;
                 }
-
-                // if (waitingForRequest && message == "SUCCESS")
-                // {
-                //     waitingForRequest = false;
-                // }
-                // else
-                // {
-                //     Console.WriteLine("CONNECTION LOST");
-                // }
-                //
-                // if (!waitingForRequest)
-                // {
-                // await SendConfirmationMessage();
-                //}
 
                 var tmpMessage = message;
 
@@ -199,7 +140,6 @@ public static class Program
                 var tmp = "";
 
                 foreach (var character in tmpMessage)
-                {
                     if (character == Convert.ToChar("|") && !readingTime) // start reading time
                     {
                         readingTime = true;
@@ -234,12 +174,9 @@ public static class Program
                     {
                         tmp += character;
                     }
-                }
 
                 if (messageTMP != "SUCCESS" && message != "SUCCESS")
-                {
                     acceptedMessages.Add(new Message(time, username, messageTMP));
-                }
 
                 Console.Clear();
 
@@ -249,20 +186,7 @@ public static class Program
                     Console.WriteLine($"{item.SenderName}: {item.Text}");
                 }
 
-                foreach (var item in sentMessages)
-                {
-                    Console.WriteLine($"You: {item.Text}");
-                }
-
-                // if (!sentMessageNeedBackPing)
-                // {
-                //     Console.WriteLine($"{username} GET BACK PING");
-                // }
-                //
-                // if (!getMessageNeedToSendPing)
-                // {
-                //     Console.WriteLine($"{username} SEND PING");
-                // }
+                foreach (var item in sentMessages) Console.WriteLine($"You: {item.Text}");
             }
         }
 

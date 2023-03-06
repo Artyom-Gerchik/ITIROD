@@ -180,10 +180,13 @@ public static class Program
 
                 Console.Clear();
 
+                //need to sort, but is useless in localhost
+                
                 foreach (var item in acceptedMessages)
                 {
                     Console.Write("\t\t\t\t\t\t\t");
                     Console.WriteLine($"{item.SenderName}: {item.Text}");
+                    
                 }
 
                 foreach (var item in sentMessages) Console.WriteLine($"You: {item.Text}");

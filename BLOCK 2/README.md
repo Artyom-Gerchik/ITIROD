@@ -63,6 +63,7 @@ to be continued...
   - Comments
   - Likes
   - Dislikes
+  - Views
   
 3) There would be more supporting models, such as: Saved Videos Model, which will contains ID of user, who stored video, and ID of video, which was stored, etc.
   

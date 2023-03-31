@@ -132,3 +132,33 @@ section {
     margin: 0;
   }
 }
+
+@media screen and (max-width: 600px) {
+  .video-card {
+    width: 20rem;
+    height: 7.5rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .video-card__preview {
+    width: 10rem;
+    height: 7.5rem;
+  }
+
+  .header__search__container button {
+    margin: 0.5rem 0.5rem 0.5rem 0;
+  }
+
+  .main-content {
+    float: none;
+    display: flex;
+    align-items: center;
+    flex-direction: column-reverse;
+  }
+
+  .section__wrapper {
+    width: fit-content;
+    margin: 0;
+  }
+}

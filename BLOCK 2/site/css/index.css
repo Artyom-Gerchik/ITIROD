@@ -74,6 +74,15 @@ header {
   font-weight: bold;
 }
 
+.button-group-vertical input {
+  display: block;
+  margin: 0 0 0.5rem 0.5rem;
+  width: 7rem;
+  height: 3rem;
+  border-radius: 0.5rem;
+  font-weight: bold;
+}
+
 section {
   display: flex;
   align-items: center;
@@ -132,6 +141,11 @@ section {
   }
 
   .button-group-vertical button {
+    width: 20.5rem;
+    margin-left: 0;
+  }
+
+  .button-group-vertical input {
     width: 20.5rem;
     margin-left: 0;
   }

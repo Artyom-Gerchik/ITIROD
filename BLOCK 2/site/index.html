@@ -30,17 +30,20 @@
     <div class="main-content">
         <form>
             <div class="button-group-vertical">
-                <button>Liked</button>
-                <button>Your Videos</button>
+                <!-- <button>Liked</button> -->
+                <!-- <button>Your Videos</button>
                 <button>History</button>
-                <button>Saved</button>
+                <button>Saved</button> -->
+                <input type="button" value="Liked" onclick="location.href='liked.html';">
+                <input type="button" value="Your Videos" onclick="location.href='owned.html';">
+                <input type="button" value="History" onclick="location.href='history.html';">
             </div>
         </form>
         <section>
             <div class="section__wrapper">
                 <div class="video-card">
                     <input type="image" src="./src/images/default_video_picture.jpg"
-                        onclick="location.href='index.html';" class="video-card__preview" />
+                        onclick="location.href='video.html';" class="video-card__preview" />
                     <p style="font-weight: bold; margin-top: 0;"> Video Name </p>
                     <p style="font-weight: bold; margin-top: 0;"> Author Name </p>
                     <p style="font-weight: bold; margin-top: 0;"> 03.03.2023 </p>

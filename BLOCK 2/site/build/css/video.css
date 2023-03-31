@@ -75,7 +75,7 @@ header {
 
 .section__wrapper {
   width: 26rem;
-  height: 30rem;
+  height: 19rem;
   overflow-y: auto;
   border: 0.1rem solid black;
   margin-left: 1rem;
@@ -95,7 +95,7 @@ section {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 3rem;
+  margin-top: 1rem;
   margin-left: auto;
   margin-right: auto;
 }

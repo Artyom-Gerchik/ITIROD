@@ -103,8 +103,8 @@ body button {
 
 section {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: center; /* vertical */
+  justify-content: center; /* horizontal */
 }
 
 .main-content-section-container {

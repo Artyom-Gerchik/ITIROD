@@ -52,6 +52,13 @@ header {
   margin-bottom: 1rem;
 }
 
+.video-card__input {
+  display: block;
+  margin: 00.5rem 0 0.5rem 0.5rem;
+  border-radius: 0.5rem;
+  font-weight: bold;
+}
+
 .video-card__preview {
   width: 15rem;
   height: 7.5rem;
@@ -80,6 +87,18 @@ header {
   margin: 00.5rem 0 0.5rem 0.5rem;
   border-radius: 0.5rem;
   font-weight: bold;
+}
+
+body button {
+  display: block;
+  margin: 00.5rem 0 0.5rem 0.5rem;
+  border-radius: 0.5rem;
+  font-weight: bold;
+
+  margin-left: auto;
+  margin-right: auto;
+
+  margin-top: 3rem;
 }
 
 section {

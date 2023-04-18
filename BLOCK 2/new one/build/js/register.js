@@ -20,6 +20,7 @@ async function register() {
                         user_name: email,
                         date_of_registration: new Date().toUTCString().slice(5, 16),
                         count_of_videos: 0,
+                        avatar: "",
                     })
                     .then(() => {
                         console.log('user saved to db')

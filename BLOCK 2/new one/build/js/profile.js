@@ -19,6 +19,7 @@ async function getUser() {
     document.getElementById("user_name").innerHTML = user.user_name;
     document.getElementById("date_of_registration").innerHTML = user.date_of_registration;
     document.getElementById("count_of_videos").innerHTML = user.count_of_videos;
+    document.getElementById("user_avatar").src = `https://firebasestorage.googleapis.com/v0/b/tubeyou-777.appspot.com/o/avatars%2F${user_logged_in}?alt=media`;
 }
 
 function logOut() {

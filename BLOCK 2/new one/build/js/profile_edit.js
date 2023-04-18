@@ -1,6 +1,7 @@
 import { getCookie, deleteCookie } from "./cookie.js"
 import { firebaseConfig, app, auth, database } from "./firebase_config.js"
 import { updateUser } from "./CRUD_users.js"
+import { addProfileImage } from "./api/files.js"
 
 let user_logged_in;
 let global_user;
@@ -25,9 +26,20 @@ async function getValues() {
     }
 }
 
-saveButton.addEventListener('click', (e) => {
+async function saveChanges() {
     global_user.user_name = document.getElementById("user_name").value;
     updateUser(global_user, user_logged_in);
+
+    const file = document.getElementById('fileAvatar').files[0];
+
+    if (file != undefined) {
+        await addProfileImage(user_logged_in, file);
+    }
+
     alert('Saved')
     window.location.reload();
+}
+
+saveButton.addEventListener('click', (e) => {
+    saveChanges();
 });

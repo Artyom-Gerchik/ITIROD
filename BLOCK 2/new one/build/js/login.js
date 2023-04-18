@@ -22,61 +22,33 @@ async function register() {
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
-    const database = getDatabase(app);
 
     submitButton.addEventListener('click', (e) => {
 
         let email = document.getElementById('email').value;
         let password = document.getElementById('password').value;
 
-        createUserWithEmailAndPassword(auth, email, password)
+        signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
+                // Signed in 
                 const user = userCredential.user;
                 setCookie('user', user.uid, 3);
+                window.location.replace("index.html");
 
-                //console.log(getCookie('user'));
-                set(ref(database, 'users/' + user.uid), {
-                        email: email,
-                        password: password
-                    })
-                    .then(() => {
-                        console.log('user saved to db')
-                        window.location.replace("index.html");
-                    })
-                    .catch((error) => {
-                        alert(error)
-                    })
+                // ...
+
             })
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
+                console.log(errorCode)
                 console.log(errorMessage)
-                alert(errorMessage)
+                if (errorCode == 'auth/invalid-email') {
+                    alert('Invalid email, brou')
+                } else if (errorCode == 'auth/user-not-found') {
+                    alert('No such account, brou')
+                }
             });
-
-        // signInWithEmailAndPassword(auth, email, password)
-        //     .then((userCredential) => {
-        //         // Signed in 
-        //         const user = userCredential.user;
-        //         // ...
-
-        //         let isLogined = true;
-
-        //         update(ref(database, 'users/' + user.uid), {
-        //                 logged_in: isLogined
-        //             })
-        //             .then(() => {
-        //                 console.log('user saved to db')
-        //             })
-        //             .catch((error) => {
-        //                 alert(error)
-        //             })
-
-        //     })
-        //     .catch((error) => {
-        //         const errorCode = error.code;
-        //         const errorMessage = error.message;
-        //     });
 
 
     });

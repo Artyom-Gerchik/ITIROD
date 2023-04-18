@@ -8,11 +8,16 @@ function setCookie(cname, cvalue, exdays) {
 function getCookie(cname) {
     var match = document.cookie.match(new RegExp('(^| )' + cname + '=([^;]+)'));
     if (match) {
-        console.log(match[2]);
+        return match[2];
     } else {
         console.log('--something went wrong---');
     }
 }
 
+function deleteCookie() {
+    document.cookie = "user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    window.location.reload();
+}
 
-export { setCookie, getCookie }
+
+export { setCookie, getCookie, deleteCookie }

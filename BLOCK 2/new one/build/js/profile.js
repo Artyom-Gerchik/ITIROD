@@ -1,5 +1,4 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-auth.js";
+import { signOut } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-auth.js";
 import { getCookie, deleteCookie } from "./cookie.js"
 import { firebaseConfig, app, auth, database } from "./firebase_config.js"
 

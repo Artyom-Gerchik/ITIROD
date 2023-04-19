@@ -20,14 +20,14 @@
 
         <div class="header__title__avatar">
             <input type="image" src="./src/images/default_avatar.png" onclick="location.href='profile.html';"
-                class="header__avatar" />
+                class="header__avatar" id="user_avatar_header" />
         </div>
     </header>
 
     <div class="main-content">
 
         <div class="main-content__container">
-            <img src="./src/images/default_avatar.png" class="main-content__avatar" />
+            <img src="./src/images/default_avatar.png" class="main-content__avatar" id="user_avatar" />
             <div class="main-content__container__info">
                 <input type="text" id="user_name" placeholder="User Name">
                 <p id="date_of_registration"></p>
@@ -38,7 +38,7 @@
                 </div>
                 <div>
                     <p>Upload Video</p>
-                    <input id="fileInput" type="file" />
+                    <input id="fileVideo" accept="video/*" type="file" />
                 </div>
 
             </div>

@@ -13,11 +13,16 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-async function addProfileImage(userId, file) {
+async function addProfileImage(userID, file) {
     const storage = getStorage(app);
-    const storageRef = ref(storage, `avatars/${userId}`);
+    const storageRef = ref(storage, `avatars/${userID}`);
     return await uploadBytes(storageRef, file);
 }
 
+async function addVideoToStorage(videoID, file) {
+    const storage = getStorage(app);
+    const storageRef = ref(storage, `videos/${videoID}`);
+    return await uploadBytes(storageRef, file);
+}
 
-export { addProfileImage }
+export { addProfileImage, addVideoToStorage }

@@ -1,7 +1,7 @@
 import { getCookie, deleteCookie } from "./cookie.js"
 import { firebaseConfig, app, auth, database } from "./firebase_config.js"
 import { updateUser } from "./CRUD_users.js"
-import { addProfileImage } from "./api/files.js"
+import { addProfileImage, addVideoToStorage } from "./api/files.js"
 import { addVideo } from "./add_video.js"
 
 let user_logged_in;
@@ -30,17 +30,20 @@ async function getValues() {
 }
 
 async function saveChanges() {
-    global_user.user_name = document.getElementById("user_name").value;
+    if (document.getElementById("user_name").value != "") {
+        global_user.user_name = document.getElementById("user_name").value;
+    }
     global_user.avatar = `https://firebasestorage.googleapis.com/v0/b/tubeyou-777.appspot.com/o/avatars%2F${user_logged_in}?alt=media`;
     const avatar = document.getElementById('fileAvatar').files[0];
     const video = document.getElementById('fileVideo').files[0];
+    console.log(video);
+
 
     if (avatar != undefined) {
         await addProfileImage(user_logged_in, avatar);
     }
     if (video != undefined) {
         await addVideo(user_logged_in, video);
-        console.log('KIRILL')
     }
 
     updateUser(global_user, user_logged_in);

@@ -21,7 +21,42 @@ async function getUser() {
     document.getElementById("count_of_videos").innerHTML = user.count_of_videos;
     document.getElementById("user_avatar").src = user.avatar;
     document.getElementById("user_avatar_header").src = user.avatar;
+
+    renderVideos();
 }
+
+function renderVideos() {
+    const fragment = document.createDocumentFragment();
+
+    const div = fragment.appendChild(document.createElement("div"));
+    div.setAttribute("class", "video-card");
+
+    const input = div.appendChild(document.createElement("input"));
+    input.setAttribute("type", "image");
+    input.setAttribute("src", "./src/images/default_video_picture.jpg");
+    input.setAttribute("onclick", "location.href='index.html';");
+    input.setAttribute("class", "video-card__preview");
+
+    const p1 = div.appendChild(document.createElement("p"));
+    p1.setAttribute("class", "p-for-video-card");
+    p1.textContent = "userName";
+
+    const p2 = div.appendChild(document.createElement("p"));
+    p2.setAttribute("class", "p-for-video-card");
+    p2.textContent = "userName";
+
+    const p3 = div.appendChild(document.createElement("p"));
+    p3.setAttribute("class", "p-for-video-card");
+    p3.textContent = "userName";
+
+    const p4 = div.appendChild(document.createElement("p"));
+    p4.setAttribute("class", "p-for-video-card-bottom");
+    p4.textContent = "userName";
+
+
+    document.getElementById("videosWrapper").appendChild(div);
+}
+
 
 function logOut() {
 

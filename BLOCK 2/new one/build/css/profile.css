@@ -1,4 +1,5 @@
 /* Style the header with a grey background and some padding */
+
 header {
   background-color: lightgray;
   display: flex;
@@ -102,7 +103,19 @@ section {
   justify-content: center;
 }
 
+.p-for-video-card {
+  font-weight: bold;
+  margin-top: 0;
+}
+
+.p-for-video-card-bottom {
+  font-weight: bold;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
 /* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
+
 @media screen and (max-width: 800px) {
   .video-card {
     width: 20rem;
@@ -110,23 +123,19 @@ section {
     margin-left: auto;
     margin-right: auto;
   }
-
   .video-card__preview {
     width: 10rem;
     height: 7.5rem;
   }
-
   .header__search__container button {
     margin: 0.5rem 0.5rem 0.5rem 0;
   }
-
   .main-content {
     float: none;
     display: flex;
     align-items: center;
     flex-direction: column-reverse;
   }
-
   .section__wrapper {
     width: fit-content;
     margin: 0;
@@ -140,23 +149,19 @@ section {
     margin-left: auto;
     margin-right: auto;
   }
-
   .video-card__preview {
     width: 10rem;
     height: 7.5rem;
   }
-
   .header__search__container button {
     margin: 0.5rem 0.5rem 0.5rem 0;
   }
-
   .main-content {
     float: none;
     display: flex;
     align-items: center;
     flex-direction: column-reverse;
   }
-
   .section__wrapper {
     width: fit-content;
     margin: 0;

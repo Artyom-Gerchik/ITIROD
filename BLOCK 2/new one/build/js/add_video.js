@@ -34,6 +34,9 @@ async function addVideoToDB(userID, videoID, videoName) {
             count_of_likes: 0,
             count_of_dislikes: 0,
             count_of_comments: 0,
+            date_of_upload: new Date().toUTCString().slice(5, 16),
+            is_published: false,
+
         })
         .then(() => {
             console.log('OK')

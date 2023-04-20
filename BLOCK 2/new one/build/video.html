@@ -22,17 +22,14 @@
             <button>Search</button>
         </div>
         <div class="header__title__avatar">
-            <input type="image" src="./src/images/default_avatar.png" onclick="location.href='profile.html';"
-                class="header__avatar" />
+            <input type="image" src="./src/images/default_avatar.png" onclick="location.href='profile.html';" class="header__avatar" />
         </div>
     </header>
 
     <div class="main-content">
         <video width="650" controls autoplay loop muted playsinline>
-            <source src="" type="video/mp4" id="test">
-
+            <source src="" type="video/mp4" id="videoFrame">
         </video>
-
         <div class="main-content__comments">
             <h1>Comments</h1>
             <div class="main-content__comments__container">
@@ -41,7 +38,7 @@
             </div>
             <section>
                 <div class="section__wrapper">
-                    <div class="comment-card">
+                    <!-- <div class="comment-card">
                         <p style="font-weight: bold; margin-top: 0;"> Vasya: </p>
                         <p style="font-weight: bold; margin-top: 0;"> So Good! </p>
                     </div>
@@ -72,7 +69,7 @@
                     <div class="comment-card">
                         <p style="font-weight: bold; margin-top: 0;"> Vasya: </p>
                         <p style="font-weight: bold; margin-top: 0;"> So Good! </p>
-                    </div>
+                    </div> -->
                 </div>
             </section>
 
@@ -81,10 +78,14 @@
         <div class="main-content__container">
 
             <div class="main-content__container__info">
-                <p>Video Number 1</p>
+                <p id="video_name"></p>
+                <p id="video_author"></p>
+                <p id="date_of_upload"></p>
+                <p id="count_of_views"></p>
+                <!-- <p>Video Number 1</p>
                 <p>LNxD</p>
                 <p>Date: 05.05.2021</p>
-                <p>Views: 100500</p>
+                <p>Views: 100500</p> -->
             </div>
 
             <div class="main-content__container__buttons">
@@ -96,7 +97,7 @@
 
     </div>
 
-    <script src="js/test.js"> </script>
+    <script type="module" src="js/video_page.js"> </script>
 
 </body>
 

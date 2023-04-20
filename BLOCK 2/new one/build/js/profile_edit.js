@@ -44,6 +44,7 @@ async function saveChanges() {
     }
     if (video != undefined) {
         await addVideo(user_logged_in, video);
+        global_user.count_of_videos += 1;
     }
 
     updateUser(global_user, user_logged_in);

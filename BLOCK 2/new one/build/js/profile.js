@@ -52,7 +52,7 @@ function renderVideos() {
 
         const input = div.appendChild(document.createElement("input"));
         input.setAttribute("type", "image");
-        input.setAttribute("src", "./src/images/default_video_picture.jpg");
+        input.setAttribute("src", "./src/images/default_video_picture.png");
         input.setAttribute("class", "video-card__preview");
         input.setAttribute("id", element.video_ID);
 

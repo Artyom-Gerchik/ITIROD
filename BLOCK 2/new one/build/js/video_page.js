@@ -2,10 +2,13 @@ import { getVideoByID } from "./api/videos.js"
 import { getCookie, deleteCookie } from "./cookie.js"
 import { updateVideo, deleteVideo } from "./CRUD_videos.js"
 import { getUserName, getUserByID } from "./CRUD_users.js"
+import { updateUser } from "./CRUD_users.js"
+
 
 let user_logged_in;
 let videoID;
 let video;
+let global_user;
 
 window.onload = async function() {
 
@@ -213,6 +216,12 @@ async function renderDeleteVideoButton() {
         input.setAttribute("id", "deleteButton");
         document.getElementById("contentInfo").appendChild(div);
         addDeleteEvent();
+        let response = await fetch(`https://tubeyou-777-default-rtdb.firebaseio.com/users/${user_logged_in}.json`);
+        let user = await response.json();
+
+        if (user.user_name != undefined) {
+            global_user = user;
+        }
     }
 }
 
@@ -228,6 +237,9 @@ async function addEvent() {
 async function addDeleteEvent() {
     document.getElementById("deleteButton").addEventListener('click', (e) => {
         deleteVideo(videoID);
+        global_user.count_of_videos -= 1;
+        updateUser(global_user, user_logged_in);
+
         alert('DELETED!')
         window.location.replace("profile.html");
     });

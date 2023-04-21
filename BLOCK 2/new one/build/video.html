@@ -17,12 +17,9 @@
             </a>
             <p style="margin-left: 0.5rem; font-weight: bold;"> TubeYou </p>
         </div>
-        <div class="header__search__container">
-            <input type="text" placeholder="Enter the request" class="header__title__input">
-            <button>Search</button>
-        </div>
+
         <div class="header__title__avatar">
-            <input type="image" src="./src/images/default_avatar.png" onclick="location.href='profile.html';" class="header__avatar" id="user_avatar_header" />
+            <input type="image" src="./src/images/default_avatar.png" id="user_avatar_header" onclick="location.href='profile.html';" class="header__avatar" />
         </div>
     </header>
 
@@ -33,11 +30,11 @@
         <div class="main-content__comments">
             <h1>Comments</h1>
             <div class="main-content__comments__container">
-                <input type="text" placeholder="Enter the comment" class="main-content__comments__input">
+                <input type="text" placeholder="Enter the comment" class="main-content__comments__input" id="commentText">
                 <button id="commentPostButton">Post</button>
             </div>
             <section>
-                <div class="section__wrapper">
+                <div class="section__wrapper" id="commentsWrapper">
                     <!-- <div class="comment-card">
                         <p style="font-weight: bold; margin-top: 0;"> Vasya: </p>
                         <p style="font-weight: bold; margin-top: 0;"> So Good! </p>
@@ -76,8 +73,7 @@
         </div>
 
         <div class="main-content__container">
-
-            <div class="main-content__container__info">
+            <div class="main-content__container__info" id="contentInfo">
                 <p id="video_name"></p>
                 <p id="video_author"></p>
                 <p id="date_of_upload"></p>
@@ -92,8 +88,8 @@
             </div>
 
             <div class="main-content__container__buttons">
-                <input type="button" onclick="" value="Like">
-                <input type="button" onclick="" value="DisLike">
+                <input type="button" onclick="" value="Like" id="likeButton">
+                <input type="button" onclick="" value="DisLike" id="disLikeButton">
             </div>
 
         </div>

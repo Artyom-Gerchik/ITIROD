@@ -14,7 +14,7 @@ let right_bound_dup = 4;
 window.onload = async function() {
     user_logged_in = getCookie('user')
     if (user_logged_in == undefined) {
-        window.location.replace("signup.html");
+        window.location.replace("register.html");
     }
 
     if (window.sessionStorage.getItem("recently") != null) {

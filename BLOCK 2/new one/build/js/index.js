@@ -62,23 +62,11 @@ window.onload = async function() {
     document.getElementById("leftButton").addEventListener('click', (e) => {
 
         if (left_bound != 0) {
-            console.log('BBBBBBBBBBBBB')
-            console.log(left_bound);
-            console.log(right_bound)
-            console.log('BBBBBBBBBBBBB')
             right_bound = left_bound;
             left_bound -= right_bound_dup;
             document.getElementById("videosWrapper").innerHTML = '';
             renderVideos(all_published_videos)
-
-
-
-
-        } // console.log('HERERER1')
-        // console.log(left_bound);
-
-        // console.log(right_bound)
-        // console.log('HERERER1')
+        }
     });
 
 }

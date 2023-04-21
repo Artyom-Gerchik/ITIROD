@@ -30,6 +30,8 @@ async function getValues() {
 
     let user = await getUserByID(video.user_uploaded_ID);
 
+    let userONPAGE = await getUserByID(user_logged_in);
+
     console.log(user)
 
     // let video_response = await fetch(`https://tubeyou-777-default-rtdb.firebaseio.com/users/${user_logged_in}.json`);
@@ -44,7 +46,7 @@ async function getValues() {
     document.getElementById("count_of_comments").textContent = "Comments: " + video.count_of_comments;
 
     document.getElementById("videoFrame").src = `https://firebasestorage.googleapis.com/v0/b/tubeyou-777.appspot.com/o/videos%2F${videoID}?alt=media`
-    document.getElementById("user_avatar_header").src = user.avatar;
+    document.getElementById("user_avatar_header").src = userONPAGE.avatar;
 
     await renderComments();
     await renderPublishVideoButton();

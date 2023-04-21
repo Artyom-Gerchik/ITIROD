@@ -14,6 +14,7 @@ window.onload = async function() {
     }
 
     let all_videos = await getVideos();
+    console.log(all_videos)
     all_videos = Object.values(all_videos);
 
     all_videos.forEach(element => {
@@ -65,8 +66,6 @@ function renderVideos() {
         const p3 = div.appendChild(document.createElement("p"));
         p3.setAttribute("class", "for-video-card");
         p3.textContent = element.date_of_upload;
-
-        console.log(element.is_published)
 
         if (element.is_published == false) {
             const p4 = div.appendChild(document.createElement("p"));

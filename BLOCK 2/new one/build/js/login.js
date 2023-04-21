@@ -1,6 +1,5 @@
-// Import the functions you need from the SDKs you need
 import { setCookie } from "./cookie.js"
-import { firebaseConfig, app, auth, database } from "./firebase_config.js"
+import { auth } from "./firebase_config.js"
 import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-auth.js";
 
 
@@ -12,13 +11,9 @@ async function login() {
 
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
-                // Signed in 
                 const user = userCredential.user;
                 setCookie('user', user.uid, 3);
                 window.location.replace("index.html");
-
-                // ...
-
             })
             .catch((error) => {
                 const errorCode = error.code;
@@ -31,8 +26,6 @@ async function login() {
                     alert('No such account, brou')
                 }
             });
-
-
     });
 }
 

@@ -1,8 +1,6 @@
-import { getVideoByID } from "./api/videos.js"
-import { getCookie, deleteCookie } from "./cookie.js"
-import { updateVideo, deleteVideo } from "./CRUD_videos.js"
-import { getUserName, getUserByID } from "./CRUD_users.js"
-import { updateUser } from "./CRUD_users.js"
+import { getVideoByID, updateVideo, deleteVideo } from "./api/videos.js"
+import { getCookie } from "./cookie.js"
+import { getUserByID, updateUser } from "./api/users.js"
 
 
 let user_logged_in;
@@ -31,7 +29,6 @@ window.onload = async function() {
 
         if (video.likes != undefined) {
             video.likes.forEach(element => {
-                console.log("1: " + element);
                 if (element.user_ID == user_logged_in) {
                     document.getElementById("likeButton").setAttribute("type", "hidden")
                 }
@@ -40,7 +37,6 @@ window.onload = async function() {
 
         if (video.disLikes != undefined) {
             video.disLikes.forEach(element => {
-                console.log("2" + element);
                 if (element.user_ID == user_logged_in) {
                     document.getElementById("disLikeButton").setAttribute("type", "hidden")
                 }
@@ -126,8 +122,6 @@ async function addDisLike(videoID) {
         }
 
         video.count_of_dislikes += 1;
-
-        console.log(video);
 
         document.getElementById("disLikeButton").setAttribute("type", "hidden")
         document.getElementById("likeButton").setAttribute("type", "button")

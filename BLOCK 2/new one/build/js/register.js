@@ -1,7 +1,7 @@
 import { setCookie } from "./cookie.js"
-import { firebaseConfig, app, auth, database } from "./firebase_config.js"
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-auth.js";
-import { getDatabase, set, ref, update } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-database.js";
+import { auth, database } from "./firebase_config.js"
+import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-auth.js";
+import {set, ref } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-database.js";
 
 
 async function register() {
@@ -23,7 +23,6 @@ async function register() {
                         avatar: "",
                     })
                     .then(() => {
-                        console.log('user saved to db')
                         window.location.replace("index.html");
                     })
                     .catch((error) => {
@@ -36,32 +35,6 @@ async function register() {
                 console.log(errorMessage)
                 alert(errorMessage)
             });
-
-        // signInWithEmailAndPassword(auth, email, password)
-        //     .then((userCredential) => {
-        //         // Signed in 
-        //         const user = userCredential.user;
-        //         // ...
-
-        //         let isLogined = true;
-
-        //         update(ref(database, 'users/' + user.uid), {
-        //                 logged_in: isLogined
-        //             })
-        //             .then(() => {
-        //                 console.log('user saved to db')
-        //             })
-        //             .catch((error) => {
-        //                 alert(error)
-        //             })
-
-        //     })
-        //     .catch((error) => {
-        //         const errorCode = error.code;
-        //         const errorMessage = error.message;
-        //     });
-
-
     });
 }
 

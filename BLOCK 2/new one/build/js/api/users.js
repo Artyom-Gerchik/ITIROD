@@ -10,12 +10,4 @@ async function getUserByID(userID) {
     return response.json();
 }
 
-async function getUserName(userID) {
-    let response = await fetch(`https://tubeyou-777-default-rtdb.firebaseio.com/users/${userID}.json`);
-    let user = await response.json();
-
-    //console.log(user.user_name);
-    return user.user_name;
-}
-
-export { updateUser, getUserName, getUserByID }
+export { updateUser, getUserByID }

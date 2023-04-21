@@ -119,7 +119,7 @@ section {
 
 .main-content {
     display: flex;
-    align-items: baseline;
+    align-items: center;
 }
 
 .main-content__videos__title {
@@ -142,6 +142,24 @@ p.for-video-card-bottom {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.button-group-vertical button {
+    display: block;
+    margin: 0 0 0.5rem 0.5rem;
+    width: 7rem;
+    height: 3rem;
+    border-radius: 0.5rem;
+    font-weight: bold;
+}
+
+.button-group-vertical input {
+    display: block;
+    margin: 0 0 0.5rem 0.5rem;
+    width: 7rem;
+    height: 3rem;
+    border-radius: 0.5rem;
+    font-weight: bold;
 }
 
 

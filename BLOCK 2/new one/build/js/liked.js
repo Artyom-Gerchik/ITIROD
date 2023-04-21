@@ -170,7 +170,7 @@ let right_bound_dup = 4;
 window.onload = async function() {
     user_logged_in = getCookie('user')
     if (user_logged_in == undefined) {
-        window.location.replace("index.html");
+        window.location.replace("register.html");
     }
 
     let all_videos = await getVideos();

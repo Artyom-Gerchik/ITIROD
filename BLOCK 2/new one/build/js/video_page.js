@@ -1,6 +1,6 @@
 import { getVideoByID } from "./api/videos.js"
 import { getCookie, deleteCookie } from "./cookie.js"
-import { updateVideo } from "./CRUD_videos.js"
+import { updateVideo, deleteVideo } from "./CRUD_videos.js"
 import { getUserName, getUserByID } from "./CRUD_users.js"
 
 let user_logged_in;
@@ -10,43 +10,58 @@ let video;
 window.onload = async function() {
 
     user_logged_in = getCookie('user');
-    if (user_logged_in == undefined) {
-        document.getElementById("commentText").setAttribute("type", "hidden")
-        document.getElementById("likeButton").setAttribute("type", "hidden")
-        document.getElementById("disLikeButton").setAttribute("type", "hidden")
-        document.getElementById("commentPostButton").setAttribute("hidden", "")
-    }
+    if (sessionStorage.getItem('videoID') != null) {
+        if (user_logged_in == undefined) {
+            document.getElementById("commentText").setAttribute("type", "hidden")
+            document.getElementById("likeButton").setAttribute("type", "hidden")
+            document.getElementById("disLikeButton").setAttribute("type", "hidden")
+            document.getElementById("commentPostButton").setAttribute("hidden", "")
+        }
 
-    videoID = sessionStorage.getItem('videoID');
-    video = await getVideoByID(videoID);
+        videoID = sessionStorage.getItem('videoID');
+        video = await getVideoByID(videoID);
 
-    if (video != undefined && video.is_published) {
-        video.count_of_views += 1;
-        await updateVideo(video, videoID);
-    }
+        if (video != undefined && video.is_published) {
+            video.count_of_views += 1;
+            await updateVideo(video, videoID);
+        }
 
-    if (video.likes != undefined) {
-        video.likes.forEach(element => {
-            console.log("1: " + element);
-            if (element.user_ID == user_logged_in) {
-                document.getElementById("likeButton").setAttribute("type", "hidden")
+        if (video.likes != undefined) {
+            video.likes.forEach(element => {
+                console.log("1: " + element);
+                if (element.user_ID == user_logged_in) {
+                    document.getElementById("likeButton").setAttribute("type", "hidden")
+                }
+            });
+        }
+
+        if (video.disLikes != undefined) {
+            video.disLikes.forEach(element => {
+                console.log("2" + element);
+                if (element.user_ID == user_logged_in) {
+                    document.getElementById("disLikeButton").setAttribute("type", "hidden")
+                }
+            });
+        }
+
+        await getValues();
+        addComment(videoID);
+        addLike(videoID);
+        addDisLike(videoID);
+
+        if (window.sessionStorage.getItem("recently") == null) {
+            var recently = [videoID];
+            window.sessionStorage.setItem("recently", JSON.stringify(recently));
+        } else {
+            var storedArray = JSON.parse(sessionStorage.getItem("recently"));
+            if (!storedArray.includes(videoID)) {
+                storedArray.push(videoID);
+                window.sessionStorage.setItem("recently", JSON.stringify(storedArray));
             }
-        });
+        }
+    } else {
+        window.location.replace("index.html");
     }
-
-    if (video.disLikes != undefined) {
-        video.disLikes.forEach(element => {
-            console.log("2" + element);
-            if (element.user_ID == user_logged_in) {
-                document.getElementById("disLikeButton").setAttribute("type", "hidden")
-            }
-        });
-    }
-
-    await getValues();
-    addComment(videoID);
-    addLike(videoID);
-    addDisLike(videoID);
 }
 
 async function getValues() {
@@ -54,9 +69,6 @@ async function getValues() {
     let user = await getUserByID(video.user_uploaded_ID);
 
     let userONPAGE = await getUserByID(user_logged_in);
-
-    // let video_response = await fetch(`https://tubeyou-777-default-rtdb.firebaseio.com/users/${user_logged_in}.json`);
-    // let video_object = await video_response.json();
 
     document.getElementById("video_name").textContent = video.video_name;
     document.getElementById("video_author").textContent = user.user_name;
@@ -73,6 +85,7 @@ async function getValues() {
 
     await renderComments();
     await renderPublishVideoButton();
+    await renderDeleteVideoButton();
 }
 
 async function addLike(videoID) {
@@ -186,12 +199,37 @@ async function renderPublishVideoButton() {
     }
 }
 
+async function renderDeleteVideoButton() {
+    if (video.user_uploaded_ID == user_logged_in) {
+
+        const fragment = document.createDocumentFragment();
+
+        const div = fragment.appendChild(document.createElement("div"));
+        div.setAttribute("class", "main-content__container__buttons");
+
+        const input = div.appendChild(document.createElement("input"));
+        input.setAttribute("type", "button");
+        input.setAttribute("value", "Delete");
+        input.setAttribute("id", "deleteButton");
+        document.getElementById("contentInfo").appendChild(div);
+        addDeleteEvent();
+    }
+}
+
 async function addEvent() {
     document.getElementById("publishButton").addEventListener('click', (e) => {
         video.is_published = true;
         updateVideo(video, videoID);
         alert('PUBLISHED!')
         window.location.reload();
+    });
+}
+
+async function addDeleteEvent() {
+    document.getElementById("deleteButton").addEventListener('click', (e) => {
+        deleteVideo(videoID);
+        alert('DELETED!')
+        window.location.replace("profile.html");
     });
 }
 

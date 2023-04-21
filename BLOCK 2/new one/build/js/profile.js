@@ -22,8 +22,6 @@ window.onload = async function() {
         }
     });
 
-    console.log(user_videos);
-
     getUser();
 }
 
